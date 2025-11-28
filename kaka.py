@@ -62,13 +62,32 @@ countries_data = [
 ]
 
 df = pd.DataFrame(countries_data, columns=["Country", "Area", "Population", "Continent"])
-def europa_sort():
-    
- european_countries = [country for country in countries_data if country[3] == "Europe"]
- print("Evropské státy:")
- for country in european_countries:
-  print(country[0])
 
-europa_sort()
+
+
+df['Density'] = df['Population'] / df['Area']
+
+top_density = df.sort_values('Density', ascending=False).head(15)
+
+
+plt.figure(figsize=(12, 8))
+sns.barplot(
+    data=top_density, 
+    x="Density", 
+    y="Country", 
+    palette="magma" 
+)
+
+
+plt.title("Top 15 zemí podle hustoty zalidnění", fontsize=16)
+plt.xlabel("Hustota (obyvatel na km²)", fontsize=12)
+plt.ylabel("Země", fontsize=12)
+
+for index, value in enumerate(top_density['Density']):
+    plt.text(value, index, f'{int(value)}', va='center')
+
+plt.tight_layout()
+plt.show()
+
 
 
