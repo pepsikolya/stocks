@@ -61,6 +61,8 @@ countries_data = [
     ("Japan", 377_975, 125_800_000, "Asia")
 ]
 
+print("Hello World")
+
 df = pd.DataFrame(countries_data, columns=["Country", "Area", "Population", "Continent"])
 
 
